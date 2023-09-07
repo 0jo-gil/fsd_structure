@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@tanstack/react-table": "^8.9.7",
     "@types/node": "^20.5.9",
     "@types/styled-components": "^5.1.26",
     "autoprefixer": "^10.4.15",

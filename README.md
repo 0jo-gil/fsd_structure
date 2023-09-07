@@ -11,3 +11,7 @@ https://velog.io/@yena1025/Vite-TS-React-Redux-tanstack-query-styled-components-
 ### 절대 경로 설정
 
 https://velog.io/@yhko1992/vite-typescript-%EC%A0%88%EB%8C%80%EA%B2%BD%EB%A1%9C
+
+### @tanstack/react-table
+
+https://tanstack.com/table/v8/docs/examples/react/basic

@@ -1,11 +1,6 @@
 import {FormInputProps} from "@/components/Form/types";
-import {useSelector} from "react-redux";
-import {RootState} from "@/store";
 
 const FormInput = ({label, name, required = false, disabled = false}: FormInputProps) => {
-    const state = useSelector((state: RootState) => state)
-
-    console.log(state)
     return (
         <div>
             {label && <label htmlFor={name}>{label}</label>}
