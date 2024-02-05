@@ -1,12 +1,31 @@
-import {ColumnHelper} from '@tanstack/react-table'
+import {ColumnHelper, HeaderGroup, flexRender} from '@tanstack/react-table'
 export interface TableHeaderProps<T> extends ColumnHelper<T> {
-    columns: ColumnHelper<T>[];
+    headerGroup: HeaderGroup<T>[];
 }
 
+
 export function TableHeader<T> ({
-    columns
+    headerGroup
 }: TableHeaderProps<T>){
+
     return (
-        <div></div>
+        <thead>
+            {headerGroup.map((header) => (
+                <tr>
+                    {header.headers.map((header) => (
+                      <th key={header.id} colSpan={header.colSpan}>
+                        {header.isPlaceholder ? null : (
+                        <div>
+                            {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                            )}
+                        </div>
+                        )}
+                    </th>
+                    ))}
+                </tr>
+            ))}
+        </thead>
     )
 }
