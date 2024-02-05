@@ -32,37 +32,37 @@ export const CreateServiceForm = () => {
 
 
     const cols = useMemo<ColumnDef<Item>[]>(
-    () => [
-    {
-        header: 'Name',
-        cell: (row) => row.renderValue(),
-        accessorKey: 'name',
-    },
-    {
-        header: 'Price',
-        cell: (row) => row.renderValue(),
-        accessorKey: 'price',
-    },
-    {
-        header: 'Quantity',
-        cell: (row) => row.renderValue(),
-        accessorKey: 'quantity',
-    },
-    ],
-    []
+        () => [
+            {
+                header: 'Name',
+                cell: (row) => row.renderValue(),
+                accessorKey: 'name',
+            },
+            {
+                header: 'Price',
+                cell: (row) => row.renderValue(),
+                accessorKey: 'price',
+            },
+            {
+                header: 'Quantity',
+                cell: (row) => row.renderValue(),
+                accessorKey: 'quantity',
+            },
+        ],
+        []
     );
 
     const dummyData = () => {
-    const items = [];
-    for (let i = 0; i < 10; i++) {
-    items.push({
-        id: i,
-        name: `Item ${i}`,
-        price: 100,
-        quantity: 1,
-    });
-    }
-    return items;
+        const items = [];
+        for (let i = 0; i < 10; i++) {
+            items.push({
+                id: i,
+                name: `Item ${i}`,
+                price: 100,
+                quantity: 1,
+            });
+        }
+        return items;
     }
 
     const {formState, handleSubmit} = methods;
@@ -80,7 +80,7 @@ export const CreateServiceForm = () => {
                 <button type='submit' disabled={!formState.isValid}>등록</button>
             </form>
 
-            <Table columns={cols} data={dummyData()} />
+            {/* <Table columns={cols} data={dummyData()} /> */}
         </FormProvider>
     )
 }
