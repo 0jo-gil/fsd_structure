@@ -19,20 +19,20 @@ type Options = {
 }
 
 
-const useCommonQuery = ({
+export const useCommonQuery = ({
     query, params = null, callbacks = {}, initEnabled = false
 }: Options) => {
-    
+
     const result = useQuery({
         queryKey: [query.key],
         queryFn: () => query.queryFn(params),
         ...callbacks
     });
-    
+
     const status = {
         isLoading: result.isLoading,
         isSucess: result.isSuccess,
-        isFetching: result.isFetching,    
+        isFetching: result.isFetching,
         isRefetching: result.isRefetching,
         isError: result.isError,
         isLoadingError: result.isLoadingError
@@ -40,8 +40,6 @@ const useCommonQuery = ({
 
     const request = result.refetch;
 
-    return  {request, result, status}
+    return { request, result, status }
 }
-
-export default useCommonQuery;
 

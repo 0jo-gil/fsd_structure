@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import {useState} from "react";
+import { useState } from "react";
 // import {useMutation} from "react-query";
 
 
@@ -19,12 +19,12 @@ export type Options = {
     initEnabled?: boolean;
 }
 
-const useCommonMutation = ({
-                               query,
-                            //    params = null,
-                               callbacks = {},
-                               initEnabled = false,
-                           }: Options) => {
+export const useCommonMutation = ({
+    query,
+    //    params = null,
+    callbacks = {},
+    initEnabled = false,
+}: Options) => {
     const [enabled, setEnabled] = useState(initEnabled);
 
     // const mutationResult = useMutation([query.key], (params: any) => query.mutationFn(params), {
@@ -52,7 +52,6 @@ const useCommonMutation = ({
 
     const request = result.mutate;
 
-    return {request, result, status};
+    return { request, result, status };
 }
 
-export default useCommonMutation;

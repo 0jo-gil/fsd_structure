@@ -1,5 +1,5 @@
-import axios, {AxiosResponse} from "axios";
-import {useCallback} from "react";
+import axios, { AxiosResponse } from "axios";
+import { useCallback } from "react";
 
 const headersConfig = {
     "Content-Type": "application/json;charset=utf-8",
@@ -15,7 +15,7 @@ type Options = {
     header?: unknown;
 }
 
-const useAxios = () => {
+export const useAxios = () => {
     const client = axios.create();
 
     // client.interceptors.response.use(
@@ -32,7 +32,7 @@ const useAxios = () => {
             let params = {};
 
             method === "GET"
-                ? (params = {params: body})
+                ? (params = { params: body })
                 : (params = {
                     data: body instanceof FormData ? body : JSON.stringify(body),
                 });
@@ -55,7 +55,5 @@ const useAxios = () => {
         []
     )
 
-    return {requestApi}
+    return { requestApi }
 }
-
-export default useAxios;

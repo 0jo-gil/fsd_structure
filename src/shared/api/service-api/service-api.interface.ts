@@ -1,3 +1,3 @@
 export interface ServiceApi {
-    createService: () => void;
+    createService: (service: any) => void;
 }

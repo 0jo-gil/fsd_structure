@@ -4,11 +4,12 @@ import { CreateServiceFormFieldset, CreateServiceFormFieldsetData, createService
 import { Table } from "@/shared/ui/tables"
 import { useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
+import { useServicesStore } from "@/entities/services/model/store"
 
 type Item = {
- name: string;
- price: number;
- quantity: number;
+    name: string;
+    price: number;
+    quantity: number;
 }
 
 export const CreateServiceForm = () => {
@@ -65,11 +66,11 @@ export const CreateServiceForm = () => {
         return items;
     }
 
-    const {formState, handleSubmit} = methods;
+    const { formState, handleSubmit } = methods;
+    const { createService } = useServicesStore();
 
     const onCreateService = async (payload: CreateServiceFormFieldsetData) => {
-        console.log(payload)
-        console.log(formState)
+        await createService(payload)
     }
 
 
