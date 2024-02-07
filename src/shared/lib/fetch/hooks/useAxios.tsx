@@ -16,7 +16,10 @@ type Options = {
 }
 
 export const useAxios = () => {
-    const client = axios.create();
+    const client = axios.create({
+        withCredentials: true,
+        baseURL: '/api'
+    });
 
     // client.interceptors.response.use(
     //     (response): AxiosResponse<any, any> => {

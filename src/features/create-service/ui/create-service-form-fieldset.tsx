@@ -1,5 +1,5 @@
 import { CategorySelect } from '@/entities/category';
-import { ServicesUseRadio } from '@/entities/services';
+import { ServicesLogoPicker, ServicesUseRadio } from '@/entities/services';
 import { Input } from '@/shared/ui/inputs';
 import { TextArea } from '@/shared/ui/textareas';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -15,7 +15,7 @@ export interface CreateServiceFormFieldsetData {
     company_KR: string;
     company_EN: string;
     useYN: string;
-    logoImg: string;
+    logoImg: string[];
     iosUrl: string;
     aosUrl: string;
     webUrl: string;
@@ -31,14 +31,14 @@ export const createServiceFormFieldsetSchema = z.object({
     company_KR: z.string(),
     company_EN: z.string(),
     useYN: z.string(),
-    logoImg: z.string(),
+    logoImg: z.array(z.string()),
     iosUrl: z.string(),
     aosUrl: z.string(),
     webUrl: z.string(),
 })
 
 export const CreateServiceFormFieldset = () => {
-    const {register, control} = useFormContext<{
+    const {register, control, setValue} = useFormContext<{
         name_KR: string;
         name_EN: string;
         categoryId: string;
@@ -48,6 +48,7 @@ export const CreateServiceFormFieldset = () => {
         iosUrl: string;
         aosUrl: string;
         webUrl: string;
+        logoImg: string;
     }>();
     
     return (
@@ -90,6 +91,11 @@ export const CreateServiceFormFieldset = () => {
                         onChange={onChange}  
                     />
                 )}
+            />
+
+            <ServicesLogoPicker
+                name="logoImg"
+                setValue={setValue}
             />
 
             <Input label="IOS" {...register("iosUrl")}/>

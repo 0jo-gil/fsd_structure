@@ -23,7 +23,7 @@ export const CreateServiceForm = () => {
             company_KR: '',
             company_EN: '',
             useYN: '',
-            logoImg: '',
+            logoImg: [],
             iosUrl: '',
             aosUrl: '',
             webUrl: '',
@@ -70,6 +70,8 @@ export const CreateServiceForm = () => {
     const { createService } = useServicesStore();
 
     const onCreateService = async (payload: CreateServiceFormFieldsetData) => {
+
+        console.log(payload, 'payload')
         await createService(payload)
     }
 

@@ -1,6 +1,5 @@
 import { servicesApi } from "@/shared/api/service-api";
 import { useAxios, useCommonMutation } from "@/shared/lib/fetch/hooks";
-import { useEffect } from "react";
 
 export const useServicesStore = () => {
     const { requestApi } = useAxios();
@@ -11,6 +10,7 @@ export const useServicesStore = () => {
         mutationFn: (params: any) =>
             requestApi('POST', '/services', params)
     }
+    
 
     const { request: requestCreateService, status, result } = useCommonMutation({
         query: requestGetStoreDetail,
@@ -26,7 +26,7 @@ export const useServicesStore = () => {
 
     const createService = async (service: any) => {
         const createdService = await servicesApi.createService(service);
-        requestCreateService({ service: createdService });
+        requestCreateService({ ...createdService, companySize: '대기업' });
 
         return {
             status,
