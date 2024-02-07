@@ -9,7 +9,7 @@ import {z} from 'zod';
 export interface CreateServiceFormFieldsetData {
     name_KR: string;
     name_EN: string;
-    categoryId: string;
+    categoryId: string | number;
     desc_KR: string;
     desc_EN: string;
     company_KR: string;
@@ -19,6 +19,7 @@ export interface CreateServiceFormFieldsetData {
     iosUrl: string;
     aosUrl: string;
     webUrl: string;
+    companySize: string;
 }
 
 

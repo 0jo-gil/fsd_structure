@@ -1,3 +1,4 @@
+import { CreateServiceFormFieldsetData } from "@/features/create-service/ui/create-service-form-fieldset";
 import { ServiceApi } from "./service-api.interface";
 
 export class PreferencesServiceAPI implements ServiceApi {
@@ -18,7 +19,11 @@ export class PreferencesServiceAPI implements ServiceApi {
         this.state = state;
     }
 
-    async createService(service: any) {
+    async getService() {
+        return await this.getState();
+    }
+
+    async createService(service: CreateServiceFormFieldsetData) {
         const state = await this.getState();
 
         const createdService = {

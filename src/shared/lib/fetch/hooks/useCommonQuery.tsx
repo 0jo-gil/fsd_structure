@@ -18,14 +18,13 @@ type Options = {
     initEnabled?: boolean
 }
 
-
+// params = null,
 export const useCommonQuery = ({
-    query, params = null, callbacks = {}, initEnabled = false
+    query, callbacks = {}, initEnabled = false
 }: Options) => {
-
     const result = useQuery({
         queryKey: [query.key],
-        queryFn: () => query.queryFn(params),
+        queryFn: (params: any) => query.queryFn(params),
         ...callbacks
     });
 

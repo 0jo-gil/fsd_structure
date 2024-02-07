@@ -5,6 +5,7 @@ import { Table } from "@/shared/ui/tables"
 import { useMemo } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { useServicesStore } from "@/entities/services/model/store"
+import { servicesQueries } from "@/entities/services/api"
 
 type Item = {
     name: string;
@@ -27,58 +28,29 @@ export const CreateServiceForm = () => {
             iosUrl: '',
             aosUrl: '',
             webUrl: '',
+            companySize: '',
         },
         resolver: zodResolver(createServiceFormFieldsetSchema)
     })
 
-
-    const cols = useMemo<ColumnDef<Item>[]>(
-        () => [
-            {
-                header: 'Name',
-                cell: (row) => row.renderValue(),
-                accessorKey: 'name',
-            },
-            {
-                header: 'Price',
-                cell: (row) => row.renderValue(),
-                accessorKey: 'price',
-            },
-            {
-                header: 'Quantity',
-                cell: (row) => row.renderValue(),
-                accessorKey: 'quantity',
-            },
-        ],
-        []
-    );
-
-    const dummyData = () => {
-        const items = [];
-        for (let i = 0; i < 10; i++) {
-            items.push({
-                id: i,
-                name: `Item ${i}`,
-                price: 100,
-                quantity: 1,
-            });
-        }
-        return items;
-    }
+    const {
+        mutate: createService,
+        isPending,
+        isError,
+        error
+    } = servicesQueries.useCreateServiceMutation();
 
     const { formState, handleSubmit } = methods;
-    const { createService } = useServicesStore();
 
-    const onCreateService = async (payload: CreateServiceFormFieldsetData) => {
-
-        console.log(payload, 'payload')
-        await createService(payload)
+    const onCreate = (payload: CreateServiceFormFieldsetData) => {
+        createService({
+            service: {...payload, categoryId: 1, companySize: 'big'}
+        })
     }
-
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onCreateService)}>
+            <form onSubmit={handleSubmit(onCreate)}>
                 <CreateServiceFormFieldset />
                 <button type='submit' disabled={!formState.isValid}>등록</button>
             </form>
