@@ -1,6 +1,6 @@
 import { queryClient } from "@/shared/lib/react-query"
-import { useMutation } from "@tanstack/react-query";
-import { createServiceMutation } from "./services-api";
+import { queryOptions, useMutation } from "@tanstack/react-query";
+import { createServiceMutation, serviceQuery } from "./services-api";
 import { useNavigate } from "react-router-dom";
 import { createApiRequest } from "@/shared/lib/fetch";
 
@@ -26,18 +26,29 @@ export const servicesService = {
 
     removeCache: (slug: string) =>
         queryClient.removeQueries({queryKey: servicesService.queryKey(slug)}),
+
+    queryOptions: (slug: string, {
+        pageNo, type
+    }: {pageNo: number, type: string}) => {
+        const serviceKey = servicesService.queryKey(slug);
+
+        return queryOptions({
+            queryKey: serviceKey,
+            queryFn: async ({signal}) => {
+                const service = await serviceQuery({query: {
+                    pageNo, type
+                }}, signal);
+
+                servicesService.setCache(service);
+                return service;
+            },
+            initialData: () => servicesService.getCache(slug)!,
+            initialDataUpdatedAt: () => 
+                queryClient.getQueryState(serviceKey)?.dataUpdatedAt,
+        })
+    }
 }
 
-export async function serviceQuery(
-    params: {query: any},
-    signal?: AbortSignal
-) {
-    return await createApiRequest({
-        method: 'GET',
-        url: '/services',
-        body: params.query,
-    }, signal)
-}
 
 export function useCreateServiceMutation() {
     const navigate = useNavigate();

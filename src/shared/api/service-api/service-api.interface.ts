@@ -1,4 +1,4 @@
-import { CreateServiceFormFieldsetData } from "@/features/create-service/ui/create-service-form-fieldset";
+import { CreateServiceFormFieldsetData } from "@/features/services/create-service/ui/create-service-form-fieldset";
 
 export interface ServiceApi {
     getService: () => void;

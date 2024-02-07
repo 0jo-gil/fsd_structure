@@ -1,4 +1,4 @@
-import { CreateServiceForm } from "@/features/create-service"
+import { CreateServiceForm } from "@/features/services/create-service"
 import { PageLayout } from "@/shared/ui/layouts"
 
 export const ServiceCreatePage = () => {
