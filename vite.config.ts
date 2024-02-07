@@ -14,6 +14,16 @@ export default defineConfig({
         ]
     },
     server: {
-        hmr: {overlay: false}
+        hmr: {overlay: false},
+        // cors: false,
+        proxy: {
+            "/api": {
+                target: "http://192.168.0.6:8080",
+                // changeOrigin: true,
+                // rewrite: (path) => path.replace(/^\/api/, ""),
+                secure: false,
+                // ws: true
+            }
+        }
     }
 })
